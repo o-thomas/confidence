@@ -1,0 +1,12 @@
+{
+  "title": "Confidence",
+  "login": {
+    "connection": "Connection",
+    "fillForm": "Please fill in all fields of the form",
+    "errorStatus1": "Your account has not yet been confirmed",
+    "errorStatus2": "This account does not exist"
+  },
+  "subscribe": {
+    "samePass": "Both passwords must be the same"
+  }
+}

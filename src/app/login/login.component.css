@@ -1,0 +1,25 @@
+.card{
+    width: 70%;
+}
+#error{
+    color: red;
+    text-align: center;
+}
+button{
+    margin:5px;
+}
+.container{
+    text-align: center;
+}
+.button{
+    margin-top:5%;
+}
+article{
+    padding-top:3%;
+    padding-bottom:3%;
+    margin-top:2%;
+}
+.register{
+    margin-top: 2%;
+    font-size:14px;
+}

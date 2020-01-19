@@ -1,0 +1,14 @@
+{
+    "title": "Confidence",
+    "login": {
+        "connection": "Connexion",
+        "fillForm": "Veuillez remplir tout les champs du formulaire",
+        "errorStatus1":"Votre compte n'a pas encore été confirmé",
+        "errorStatus2":"Ce compte n'existe pas"
+    },
+    "subscribe":{
+        "samePass":"Les deux mots de passe doivent être identique",
+        "errorStatus1":"Ce pseudo a déja été utilisé",
+        "errorStatus2":"Cette adresse Email a déja été utilisée"
+    }
+}

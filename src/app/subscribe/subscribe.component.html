@@ -1,0 +1,45 @@
+<p>{{error | translate}}</p>
+<section class ="container-fluid">
+    <h1 class="text-center">Inscription</h1>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="col-sm-12">
+          <article class="col-sm-7 card mx-auto">
+            <form class='row col-sm-9 card-body mx-auto' [formGroup]="form">
+              <div class="col-sm-6">
+                <label for="firstname">Prénom</label>
+                <input formControlName="firstname" type="text" class="form-control" id="firstname" name="firstname">
+              </div>
+              <div class="col-sm-6">
+                <label for="name">Nom</label>
+                <input formControlName="name" type="text" class="form-control" id="name" name="name">
+              </div>
+              <div class="col-sm-6">
+                <label for="name">Pseudo</label>
+                <input formControlName="userName" type="text" class="form-control" id="userName" name="userName">
+              </div>               
+              <div class="col-sm-12">
+                <label for="mail">Mail</label>
+                <input formControlName="mail" type="text" class="form-control" id="mail" name="mail">
+              </div>           
+              <div class="col-sm-6">
+                <label for="pass">Mot de passe</label>
+                <input formControlName="pass" type="password" class="form-control" id="pass" name="pass">
+              </div>
+              <div class="col-sm-6">
+                <label for="confPass">Confirmez le mot de passe</label>
+                <input formControlName="confPass" type="password" class="form-control" id="confPass" name="confPass">
+              </div>
+            </form>
+            <div class="button row col-sm-12 mx-auto">
+              <input class="col-sm-5 mx-auto" type="button" (click)="register()" value="Inscription">
+            </div>
+          </article>
+          <div class="register col-sm-6 mx-auto row">
+            <button class="col-sm-5 mx-auto" routerLink="/login">Déjà inscrit ?</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
