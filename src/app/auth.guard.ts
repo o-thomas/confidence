@@ -6,32 +6,36 @@ import { Injectable } from '@angular/core';
 export class AuthGuard implements CanActivate {
 
   constructor(private router: Router, private auth: LoginService) { }
-  response: any
+  isConnected: any
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
     this.auth.isAuth(localStorage.getItem("token"))
       .subscribe(
         res => {
-          this.response = res
-          if (this.response == false) {
+          this.isConnected = res
+          if (this.isConnected == false) {
+            this.auth.Auth = false
             localStorage.removeItem("token");
             this.router.navigate(['/login']);
           } else {
+            this.auth.Auth = true
             return true;
           }
         },
         err => {
-          console.log(err)
+          this.auth.Auth = false
           localStorage.removeItem("token");
           this.router.navigate(['/login']);
         }
       )
-    if (this.response == false) {
+    if (this.isConnected == false) {
+      this.auth.Auth = false
       localStorage.removeItem("token");
       this.router.navigate(['/login']);
       return false
     } else {
+      this.auth.Auth = true;
       return true;
     }
   }

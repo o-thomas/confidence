@@ -1,14 +1,46 @@
 {
     "title": "Confidence",
+    "form": {
+        "fillForm": "Veuillez remplir tout les champs du formulaire"
+    },
     "login": {
         "connection": "Connexion",
-        "fillForm": "Veuillez remplir tout les champs du formulaire",
-        "errorStatus1":"Votre compte n'a pas encore été confirmé",
-        "errorStatus2":"Ce compte n'existe pas"
+        "deconection": "Déconection",
+        "errorStatus1": "Votre compte n'a pas encore été confirmé",
+        "errorStatus2": "Ce compte n'existe pas"
     },
-    "subscribe":{
-        "samePass":"Les deux mots de passe doivent être identique",
-        "errorStatus1":"Ce pseudo a déja été utilisé",
-        "errorStatus2":"Cette adresse Email a déja été utilisée"
+    "subscribe": {
+        "samePass": "Les deux mots de passe doivent être identique",
+        "errorStatus1": "Cette adresse Email a déja été utilisée",
+        "errorStatus2": "Ce pseudo a déja été utilisé",
+        "registerSucces": "Un mail de Validation vient de vous être envoyé",
+        "validMail": "Veuillez entrer un adresse mail valide",
+        "validFirstname": "Veuillez entrer un prénom valide",
+        "validName": "Veuillez entrer un nom valide"  
+    },
+    "mail":{
+        "subscribeMail":{
+            "subject":"Inscription sur Confidence",
+            "title": "Bienvenue sur Confidence !",
+            "message":"Pour activer votre compte, veuillez cliquer sur le lien ci-dessous ou copier/coller dans votre navigateur internet."
+        }
+    },
+    "formfield":{
+        "mail": "E-mail",
+        "password":"Mot de passe",
+        "firstname": "Prénom",
+        "name":"Nom",
+        "username": "Pseudo",
+        "confirmPass": "Confirmez le mot de passe",
+        "error":{
+            "mail": "Entrez un mail valide",
+            "password":"Entrez un mot de passe valide",
+            "firstname": "Entrez un prénom valide",
+            "name":"Entrez un nom valide",
+            "username": "Entrez un pseudo valide",
+            "confirmPass": "Confirmez le mot de passe"
+        }
+
+
     }
 }

@@ -8,7 +8,8 @@
         <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ml-md-auto d-md-flex">
                 <li id="contentConnect" class="nav-item">
-                    <a routerLink="/login" id="connexion" class="nav-link">{{'login.connection' | translate}}</a>
+                    <a *ngIf=" this.serviceLogin.Auth == false" routerLink="/login" id="connexion" class="nav-link">{{'login.connection' | translate}}</a>
+                    <a *ngIf=" this.serviceLogin.Auth == true" id="connexion" (click)="deconexion()" class="nav-link">{{'login.deconection' | translate}}</a>
                 </li>
             </ul>
         </div>

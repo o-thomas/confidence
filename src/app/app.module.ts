@@ -12,6 +12,7 @@ import { HeaderComponent } from './header/header.component';
 import { SubscribeComponent } from './subscribe/subscribe.component';
 import { HomeComponent } from './home/home.component';
 import { LoginService } from './login/service/login.service';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { LoginService } from './login/service/login.service';
     LoginComponent,
     HeaderComponent,
     SubscribeComponent,
-    HomeComponent
+    HomeComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,5 @@ import { LoginService } from './login/service/login.service';
 
 export class AppModule { }
 export function HttpLoaderFactory(http: HttpClient) {
-  console.log('blaaa')
   return new TranslateHttpLoader(http);
 }

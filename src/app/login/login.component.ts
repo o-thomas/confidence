@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
         )
     } else {
       window.scrollTo(0, 0)
-      this.error = "login.fillForm"
+      this.error = "form.fillForm"
     }
   }
 }

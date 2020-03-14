@@ -1,12 +1,43 @@
 {
   "title": "Confidence",
+  "form": {
+    "fillForm": "Please fill in all fields of the form"
+  },
   "login": {
     "connection": "Connection",
-    "fillForm": "Please fill in all fields of the form",
+    "deconection": "Deconection",
     "errorStatus1": "Your account has not yet been confirmed",
     "errorStatus2": "This account does not exist"
   },
   "subscribe": {
-    "samePass": "Both passwords must be the same"
-  }
+    "samePass": "Both passwords must be the same",
+    "errorStatus1": "This Email address has already been used",
+    "errorStatus2": "This nickname has already been used",
+    "registerSuccess":"A validation email has just been sent to you",
+    "validMail": "Please enter a valid email address",
+    "validFirstname": "Please enter a valid firstname",
+    "validName": "Please enter a valid name" 
+  },
+  "mail":{
+    "title":"Welcome to Confidence !",
+    "message":"To activate your account, please click on the link below or copy / paste into your internet browser."
+  },
+  "formfield":{
+    "mail": "E-mail",
+    "password":"Password",
+    "firstname": "Firstname",
+    "name":"Name",
+    "username": "Username",
+    "confirmPass": "Confirm your password",
+    "error":{
+        "mail": "Please enter a valid e-mail",
+        "password":"Please enter a valid password",
+        "firstname": "Please enter a valid firstname",
+        "name":"Please enter a valid name",
+        "username": "Please enter a valid username"
+      
+    }
+
+
+}
 }

@@ -6,7 +6,7 @@ import { AppService } from '../../service/app.service'
   providedIn: 'root'
 })
 export class LoginService {
-  Auth: boolean = false
+  Auth:any = false;
   private _verifConnect = this._app.backHost + "/user/userVerif";
   private _userLogin = this._app.backHost + "/user/userLogin";
   constructor(private http: HttpClient, private _app: AppService) { }

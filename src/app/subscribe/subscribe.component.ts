@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubscribeService } from './service/subscribe.service'
 import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 
 
@@ -11,33 +12,45 @@ import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 })
 export class SubscribeComponent implements OnInit {
   form: FormGroup
-  response:object;
-  userRegister:object;
-  error:String;
-  
+  userRegister: object;
+  error: String;
+  couriel: object;
 
 
-  constructor(private _registerService: SubscribeService) { }
+
+  constructor(private _registerService: SubscribeService, private _translate: TranslateService) { }
 
   ngOnInit() {
+    if(localStorage.getItem('token')){
+      localStorage.removeItem('token')
+    }
     this.form = new FormGroup({
       name: new FormControl(
-      '',
-      [Validators.required]
+        '',
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z][A-Za-z\é\è\ê\-]+$"),
+        ]
       ),
-      userName: new FormControl(
-      '',
-      [Validators.required]
+      username: new FormControl(
+        '',
+        [Validators.required]
       ),
       firstname: new FormControl(
         '',
-        [Validators.required]
+        [
+          Validators.required,
+          Validators.pattern("^[a-zA-Z][A-Za-z\é\è\ê\-]+$"),
+        ]
       ),
       mail: new FormControl(
         '',
-        [Validators.required]
+        [
+          Validators.required,
+          Validators.email
+        ]
       ),
-      pass: new FormControl(
+      password: new FormControl(
         '',
         [Validators.required]
       ),
@@ -50,9 +63,9 @@ export class SubscribeComponent implements OnInit {
 
   register() {
     if (this.form.status == "VALID") {
-      if (this.form.value['pass'] != this.form.value['confPass']) {
+      if (this.form.value['password'] != this.form.value['confPass']) {
         window.scrollTo(0, 0)
-        this.error = "Les deux mots de passe doivent être identique"
+        this.error = "subscribe.samePass"
       } else {
         this.userRegister = this.form.value
         this.userRegister["conf"] = 0
@@ -62,18 +75,35 @@ export class SubscribeComponent implements OnInit {
           key += Math.floor(Math.random() * 9);
         }
         this.userRegister["keyconf"] = key
-        this._registerService.userRegister(this.userRegister)
+        this._translate.get(
+          ['mail.subscribeMail.message', 'mail.subscribeMail.title', 'mail.subscribeMail.subject'])
+          .subscribe(val => {
+            this.couriel = val;
+          });
+        this._registerService.userRegister(this.userRegister, this.couriel)
           .subscribe(
             res => {
-              console.log(this.form.value)
-              this.response = res
+              var response = res
               window.scrollTo(0, 0)
-
-              this.error = this.response['text']
+              this.error = response['text']
               if (this.error == "undefined") {
                 window.scrollTo(0, 0)
-                this.error = "Un Email de Validation vient de vous être envoyé"
+                this.error = "subscribe.registerSuccess"
               } else {
+                if (response['errorStatus']) {
+                  switch (response['errorStatus']) {
+                    case 1:
+                      window.scrollTo(0, 0)
+                      this.error = "subscribe.errorStatus1"
+                      break;
+                    case 2:
+                      window.scrollTo(0, 0)
+                      this.error = "subscribe.errorStatus2"
+                      break;
+                    default:
+                      break;
+                  }
+                }
               }
 
             },
@@ -83,9 +113,10 @@ export class SubscribeComponent implements OnInit {
       }
     } else {
       window.scrollTo(0, 0)
-      this.error = "Veuillez remplir tout les champs du formulaire"
+      this.error = "form.fillForm"
+      }
     }
   }
-  
-  }
+
+
 

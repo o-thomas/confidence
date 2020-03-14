@@ -4,10 +4,11 @@ const userSchema = new Schema({
    
     name: String,
     firstname: String,
-    pseudo: String,
+    username: String,
     mail: String,
     password: String,
-    AccountStatus: Boolean,
+    accountStatus: Number,
+    keyconf: String,
    
 })
 module.exports = mongoose.model('user', userSchema, 'users') // (nom du model, nom du schema, nom de la collection de la bdd)

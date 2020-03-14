@@ -5,7 +5,9 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require('../models/users');
 const crypto = require("../functions/crypt.js");
+const stringFormat = require("../functions/stringFormat.js");
 const mail = require("../functions/mail.js");
+const config = require('../config/config');
 
 router.get('/userLogin', (req, res) => {
   User.findOne({ mail: req.headers.mail, password: crypto.encrypt(req.headers.pass) }, function (err, user) {
@@ -21,7 +23,6 @@ router.get('/userLogin', (req, res) => {
           mailCrypted = {}
           let token = jwt.sign({ username: req.headers.mail }, 'secret', { expiresIn: '3h' })
           mailCrypted.token = token
-          console.log(token)
           res.status(200).json(mailCrypted)
         }
       }
@@ -35,39 +36,49 @@ router.get('/userLogin', (req, res) => {
 
 })
 
-router.post('/userRegister', (req, res, next) => {
-  let pass = req.headers.pass
-
-  User.findOne({ rpps: req.headers.userName }, function (err, res) {
-    if (res != null) {
+router.post('/userRegister', (req, res) => {
+  User.findOne({ mail: req.headers.mail }, function (err, result,next) {
+    if (result != null) {
       var error = {
         errorStatus: 1
       }
-      res.status(200).send(errorStatus)
+      res.json(error)
     } else {
-      User.findOne({ mail: req.headers.mail }, function (err, test) {
-        if (test != null) {
+      User.findOne({ username: req.headers.username }, function (err, user,next) {
+        if (user != null) {
           var error = {
             errorStatus: 2
           }
-          res.status(200).send(mess)
+          res.status(200).send(error)
         } else {
           let userData = req.body
-          console.log(req.body)
+          userData.accountStatus = 0
+          userData.password = crypto.encrypt(userData.password)
+          userData.firstname = stringFormat.firstLetterUp(userData.firstname)
+          userData.name = stringFormat.firstLetterUp(userData.name)
           let user = new User(userData)
           user.save(userData)
-          user.pass = crypto.encrypt(pass)
-          res.status(200).send(userData)
-          var to = req.query.mail // list of receivers (who receives)
-          var subject = 'Inscription au registre'// Subject line
+          var to = req.headers.mail 
+          var subject = req.headers.subject// Subject line
           var text = '' // plaintext body
-          var html = "<h3> Bienvenue sur le registre d'oncologie' !</h3><br> Pour activer votre compte, veuillez cliquer sur le lien ci-dessous ou copier/coller dans votre navigateur internet.<br><br><a href = '" + config.item.host + "confirmation?key=" + req.query.key + "&id=" + encrypt(req.query.mail) + "'>" + config.item.host + "confirmation?key=" + req.query.key + "&id=" + encrypt(req.query.mail) + "</a>"
+          var html = "<h3>" + req.headers.title + "</h3> <br><p>" + req.headers.message + "</p>" + "<br><a href = '"+  config.item.host+"confirmation?key=" + userData.keyconf + "&id=" + crypto.encrypt(userData.mail) + "'>"+config.item.host+"confirmation?key=" + userData.keyconf + "&id=" + crypto.encrypt(userData.mail) + "</a>";
           mail.mail(to, subject, text, html)
         }
       })
     }
   })
 })
+
+router.get('/confirmation', (req, res) => {
+  var id = req.query.id
+  User.update({ mail: crypto.decrypt(id) }, { $set: { accountStatus: 1 } }, function (err, user) {
+      if (err) return next(err);
+      if (user) {
+          res.json(user);
+      }
+  })
+})
+
 
 
 router.get('/userVerif', verifToken, (req, res) => {

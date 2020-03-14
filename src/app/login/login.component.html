@@ -7,17 +7,20 @@
       <article class="card col-sm-6 mx-auto ">
         <form class='row col-sm-9 card-body mx-auto' [formGroup]="form">
           <div class="col-sm-12">
-            <label for="mail">Adresse mail</label>
+            <label for="mail">{{ 'formfield.mail' | translate }}</label>
             <input formControlName="mail" type="text" class="form-control" id="mail" name="mail">
           </div>
           <div class="col-sm-12">
-            <label for="password">Mot de passe</label>
+            <label for="password">{{ 'formfield.password' | translate }}</label>
             <input formControlName="password" type="password" class="form-control" id="paswword" name="password">
           </div>
           <div class="button row col-sm-12 mx-auto">
             <button class="col-sm-5 mx-auto" (click)='login()'>Connexion</button>
           </div>
         </form>
+        <div class="register col-sm-6 mx-auto row">
+          <button class="col-sm-5 mx-auto" routerLink="/subscribe">Pas encore inscrit ?</button>
+        </div>
       </article>
     </div>
   </div>
