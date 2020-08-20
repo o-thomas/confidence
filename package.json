@@ -21,7 +21,7 @@
     "@angular/router": "~8.2.14",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^4.0.0",
-    "bcrypt": "^3.0.7",
+    "bcrypt": "^5.0.0",
     "bootstrap": "^4.4.1",
     "config": "^3.2.5",
     "cors": "^2.8.5",
